@@ -1,46 +1,59 @@
-import random
-initMob = 5
+import gamemap
+import time
 
-def moveAble (a,b,c,d,e) :
+def moveAble (x) :
+
+    
+
+    a= (gamemap.mapHere[x][0])
+    b= (gamemap.mapHere[x][1])
+    c= (gamemap.mapHere[x][2])
+    d= (gamemap.mapHere[x][3])
+    f= (gamemap.mapHere[x][5])
+    print ()
+    print (f)
+    print ()
+    time.sleep(1)
     aT = bT = cT = dT =''
     ableDir = []
-    n = 0;
     ableMove = 0
 
-    if a == '1' :
+    if a > 0 :
         aT = ' 1.앞으로 '
         ableDir.append('1')
-    if b == '1' :
+    if b > 0 :
         bT = ' 2.좌로 '
         ableDir.append('2')
-    if c =='1' :
+    if c > 0 :
         cT = ' 3.우로 '
         ableDir.append('3')
-    if d == '1' :
+    if d > 0 :
         dT = ' 0.뒤로 '
         ableDir.append('0')
 
-    addText = aT + bT + cT + dT    
-    direction = input('어디로 이동합니까?'+addText)
-    while ableMove == 0 :
-        if direction in ableDir :
-            print('이동합니다.')
-            mobCheck(e)
-            ableMove = 1
-            break
-        else :
-            print ('잘못된 방향입니다.')
-            direction = input('어디로 이동합니까?'+addText)
-
-
-def mobCheck (x) :
-    print ('적이 있는지 확인합니다. 적 출현확률:', x, '%')
-    monster = random.randint (0,100)
-    if monster <= x:
-        print ('적이 나타났습니다.')
-        print ('적 출현 확률이 초기화됩니다.')
-        initMob = 5
+    addText = aT + bT + cT + dT
+    if (x <= 2) :
+        direction = input('어디로 이동합니까?'+addText)
+        while ableMove == 0 :
+            if direction in ableDir :
+                if (direction == '1'):
+                    goto = a
+                if (direction == '2'):
+                    goto = b
+                if (direction == '3'):
+                    goto = c
+                if (direction == '0'):
+                    goto = d
+                nextPlace = gamemap.mapHere[goto][4]
+                print ('당신은',nextPlace,'로 이동합니다.')
+                moveAble(goto)
+                ableMove = 1
+                break
+            else :
+                print ('잘못된 방향입니다.')
+                direction = input('어디로 이동합니까?'+addText)
     else :
-        print ('적이 없습니다.')
-        print ('적 출현 확률이 증가합니다.')
-        initMob = x + 5
+        print('더이상 갈 곳이 없습니다.')
+    
+
+
