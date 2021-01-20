@@ -1,50 +1,32 @@
-import gamemap #지도 정의
-import movement #이동 함수
-import checkenemy #몹 탐색
+import prologue #프롤로그
+import movement #이동
 import time #딜레이
+import saveload #저장
 
-class color:
-   PURPLE = '\033[95m'
-   CYAN = '\033[96m'
-   DARKCYAN = '\033[36m'
-   BLUE = '\033[94m'
-   GREEN = '\033[92m'
-   YELLOW = '\033[93m'
-   RED = '\033[91m'
-   BOLD = '\033[1m'
-   UNDERLINE = '\033[4m'
-   END = '\033[0m'
+lv = 1
+att = 5
+arm = 5
+plc = 1
 
-print (color.BOLD + '오로라력 2021년, 어느날.' +color.END)
-time.sleep (1)
-print ('현자 장영진은 옐로나이프 성으로부터 강한 악의 기운을 느꼈다.')
-time.sleep (2)
-print ('장영진: 결국, 이렇게 되는 것인가?.')
-time.sleep (2)
-print ('그는 서둘러 용사 벨로가를 부른다.')
-time.sleep (2)
-print ('벨로가: 부르셨습니까?')
-time.sleep (2)
-print ('장영진: 오오, 자네 왔는가.')
-time.sleep (1.4)
-print ('장영진: 예연이 실현되려는 모양이야.')
-time.sleep (1.4)
-print ('장영진: 마왕의 출현에 대한 예언이...')
-time.sleep (1.4)
-print ('벨로가: 그렇다면?')
-time.sleep (1)
-print ('장영진: 이 검과 방패를 들고 떠나게. 가서 꼭 마왕을 물리치게나.')
-time.sleep (1.4)
-print ('용사 벨로가는 서현검을 장비했다.')
-time.sleep (1.4)
-print ('용사 벨로가는 서정방패를 장비했다.')
-time.sleep (1.4)
-print ('장영진: 옐로나이프 성으로 떠나게. 가서 꼭 세상을 구해주게나.')
-time.sleep (1.4)
-
-print ('용사 벨로가는 옐로나이프 성으로 향한다.')
-time.sleep (1.4)
+def starting () :
+    print ('\n * 어디서든 "0" 을 입력하면 메뉴로 이동합니다.\n')
+    time.sleep(1)
+    print ('[현재 상태]\n')
+    time.sleep(0.5)
+    print ('레벨:',lv,'/ 공격력:',att,'/ 방어력:',arm,'/ 위치:',plc)
+    time.sleep(1)
+    movement.moveAble(plc)
 
 
-movement.moveAble(1)
-
+if saveload.userdata != '':
+    saved = input ('지난 게임을 불러오시겠습니까? 1.예 2.아니오\n')
+    if saved != '1':
+        x = input('프롤로그를 보시겠습니까? 1.본다 2.안 본다\n')
+        prologue.firstgame(x)
+        starting ()
+    else :
+        lv = int(saveload.userdata[0])
+        att = int(saveload.userdata[1])
+        arm = int(saveload.userdata[2])
+        plc = int(saveload.userdata[3])
+        starting ()

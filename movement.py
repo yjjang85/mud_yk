@@ -1,18 +1,18 @@
 import gamemap
 import time
+import checkenemy
+import menu
 
 def moveAble (x) :
-
-    
 
     a= (gamemap.mapHere[x][0])
     b= (gamemap.mapHere[x][1])
     c= (gamemap.mapHere[x][2])
     d= (gamemap.mapHere[x][3])
+    e= (gamemap.mapHere[x][4])
     f= (gamemap.mapHere[x][5])
-    print ()
-    print (f)
-    print ()
+    print ('\n\n'+e)
+    print ('\n'+f+'\n\n')
     time.sleep(1)
     aT = bT = cT = dT =''
     ableDir = []
@@ -28,24 +28,28 @@ def moveAble (x) :
         cT = ' 3.우로 '
         ableDir.append('3')
     if d > 0 :
-        dT = ' 0.뒤로 '
-        ableDir.append('0')
+        dT = ' 4.뒤로 '
+        ableDir.append('4')
 
     addText = aT + bT + cT + dT
     if (x <= 2) :
-        direction = input('어디로 이동합니까?'+addText)
+        direction = input('어디로 이동합니까?'+addText+'\n')
         while ableMove == 0 :
-            if direction in ableDir :
+            if (direction == '0'):
+                    menu.action(x)
+            elif direction in ableDir :
                 if (direction == '1'):
                     goto = a
                 if (direction == '2'):
                     goto = b
                 if (direction == '3'):
                     goto = c
-                if (direction == '0'):
+                if (direction == '4'):
                     goto = d
                 nextPlace = gamemap.mapHere[goto][4]
-                print ('당신은',nextPlace,'로 이동합니다.')
+                print ('당신은',nextPlace,'로 이동합니다.\n')
+                time.sleep(1)
+                checkenemy.mobCheck(goto)
                 moveAble(goto)
                 ableMove = 1
                 break

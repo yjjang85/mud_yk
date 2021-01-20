@@ -1,11 +1,15 @@
+import random
+import time
+import battle
+
 def mobCheck (x) :
-    print ('적이 있는지 확인합니다. 적 출현확률:', x, '%')
+    time.sleep(0.5)
+    print ('적이 있는지 확인합니다.')
     monster = random.randint (0,100)
-    if monster <= x:
-        print ('적이 나타났습니다.')
-        print ('적 출현 확률이 초기화됩니다.')
-        #적 출현 확률 초기화
+    if monster <= 50:
+        battle.fight(n)
+        time.sleep(1)
+        n = int(x)
     else :
-        print ('적이 없습니다.')
-        print ('적 출현 확률이 증가합니다.')
-        #적 출현 확률 +5
+        print ('적이 없습니다.\n')
+        time.sleep(1)
