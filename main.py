@@ -3,6 +3,8 @@ import movement #이동
 import time #딜레이
 import saveload #저장
 
+#initial_state
+
 lv = 1
 att = 5
 arm = 5

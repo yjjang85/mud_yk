@@ -22,7 +22,7 @@ def action (a):
     if x == '4':
         print ('저장합니다.')
         f = open('savedata.txt','w')
-        temp = '10,5,7'
+        temp = '' #현재위치,현재 경험치,장비번호만 저장
         print (temp, file=f)
         f.close()
         action(a)
